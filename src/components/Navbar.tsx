@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Search, ShoppingBag, User, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useStore } from '@/stores/useStore';
@@ -20,11 +21,11 @@ const Navbar = () => {
   } = useStore();
 
   const navLinks = [
-    { name: 'New & Featured', href: '/featured' },
-    { name: 'Men', href: '/men' },
-    { name: 'Women', href: '/women' },
-    { name: 'Kids', href: '/kids' },
-    { name: 'Sale', href: '/sale' },
+    { name: 'New & Featured', href: '/products' },
+    { name: 'Men', href: '/products' },
+    { name: 'Women', href: '/products' },
+    { name: 'Kids', href: '/products' },
+    { name: 'Sale', href: '/products' },
   ];
 
   return (
@@ -42,31 +43,36 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <a href="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-black text-lg">e</span>
               </div>
               <span className="text-xl font-black tracking-tight text-gradient">
                 .eStore
               </span>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  className="text-foreground hover:text-accent transition-colors duration-200 font-medium tracking-tight"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -2 }}
-                >
-                  {link.name}
-                </motion.a>
+                <motion.div key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-foreground hover:text-accent transition-colors duration-200 font-medium tracking-tight"
+                  >
+                    <motion.span
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ y: -2 }}
+                      className="inline-block"
+                    >
+                      {link.name}
+                    </motion.span>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -180,17 +186,22 @@ const Navbar = () => {
           >
             <div className="flex flex-col space-y-4">
               {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  className="text-foreground hover:text-accent transition-colors duration-200 font-medium tracking-tight px-2 py-1"
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </motion.a>
+                <motion.div key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-foreground hover:text-accent transition-colors duration-200 font-medium tracking-tight px-2 py-1"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <motion.span
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="inline-block"
+                    >
+                      {link.name}
+                    </motion.span>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>
