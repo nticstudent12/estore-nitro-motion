@@ -1,0 +1,110 @@
+import { Product } from '@/stores/useStore';
+
+export const sampleProducts: Product[] = [
+  {
+    id: '1',
+    name: 'CodeRunner Pro',
+    price: 299,
+    originalPrice: 399,
+    image: '/placeholder-product-1.jpg',
+    images: ['/placeholder-product-1.jpg', '/placeholder-product-1-2.jpg'],
+    category: 'Performance',
+    description: 'Ultimate performance sneaker designed for developers who spend long hours coding. Features advanced comfort technology and ergonomic design.',
+    rating: 4.9,
+    reviews: 234,
+    sizes: ['7', '8', '9', '10', '11', '12'],
+    colors: ['Black', 'White', 'Gray', 'Navy'],
+    inStock: true,
+    featured: true,
+    slug: 'coderunner-pro'
+  },
+  {
+    id: '2',
+    name: 'DevFlow Elite',
+    price: 249,
+    originalPrice: 329,
+    image: '/placeholder-product-2.jpg',
+    images: ['/placeholder-product-2.jpg', '/placeholder-product-2-2.jpg'],
+    category: 'Lifestyle',
+    description: 'Sleek lifestyle sneaker perfect for the modern developer. Combines style with the comfort needed for all-day wear.',
+    rating: 4.7,
+    reviews: 156,
+    sizes: ['7', '8', '9', '10', '11', '12'],
+    colors: ['Black', 'White', 'Red', 'Blue'],
+    inStock: true,
+    featured: true,
+    slug: 'devflow-elite'
+  },
+  {
+    id: '3',
+    name: 'Terminal Walker',
+    price: 199,
+    originalPrice: 259,
+    image: '/placeholder-product-3.jpg',
+    images: ['/placeholder-product-3.jpg', '/placeholder-product-3-2.jpg'],
+    category: 'Casual',
+    description: 'Casual everyday shoe for developers. Minimalist design with maximum comfort for daily wear.',
+    rating: 4.6,
+    reviews: 89,
+    sizes: ['7', '8', '9', '10', '11', '12'],
+    colors: ['Black', 'White', 'Gray'],
+    inStock: true,
+    featured: false,
+    slug: 'terminal-walker'
+  },
+  {
+    id: '4',
+    name: 'Stack Overflow',
+    price: 349,
+    originalPrice: 429,
+    image: '/placeholder-product-4.jpg',
+    images: ['/placeholder-product-4.jpg', '/placeholder-product-4-2.jpg'],
+    category: 'Premium',
+    description: 'Premium high-top sneaker for the elite developer. Advanced technology meets exceptional style.',
+    rating: 4.8,
+    reviews: 167,
+    sizes: ['7', '8', '9', '10', '11', '12'],
+    colors: ['Black', 'White', 'Gold', 'Silver'],
+    inStock: true,
+    featured: true,
+    slug: 'stack-overflow'
+  },
+  {
+    id: '5',
+    name: 'Git Push Force',
+    price: 179,
+    originalPrice: 229,
+    image: '/placeholder-product-5.jpg',
+    images: ['/placeholder-product-5.jpg', '/placeholder-product-5-2.jpg'],
+    category: 'Sport',
+    description: 'Athletic shoe for active developers. Perfect for workouts, walks, and active lifestyle.',
+    rating: 4.5,
+    reviews: 92,
+    sizes: ['7', '8', '9', '10', '11', '12'],
+    colors: ['Black', 'White', 'Red', 'Green'],
+    inStock: true,
+    featured: false,
+    slug: 'git-push-force'
+  },
+  {
+    id: '6',
+    name: 'Async Runner',
+    price: 229,
+    originalPrice: 289,
+    image: '/placeholder-product-6.jpg',
+    images: ['/placeholder-product-6.jpg', '/placeholder-product-6-2.jpg'],
+    category: 'Running',
+    description: 'High-performance running shoe optimized for developers who code and run. Lightweight and responsive.',
+    rating: 4.7,
+    reviews: 134,
+    sizes: ['7', '8', '9', '10', '11', '12'],
+    colors: ['Black', 'White', 'Blue', 'Orange'],
+    inStock: true,
+    featured: true,
+    slug: 'async-runner'
+  }
+];
+
+export const featuredProducts = sampleProducts.filter(product => product.featured);
+export const newProducts = sampleProducts.slice(0, 3);
+export const saleProducts = sampleProducts.filter(product => product.originalPrice && product.originalPrice > product.price);
