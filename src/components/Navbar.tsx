@@ -16,6 +16,7 @@ const Navbar = () => {
     toggleCart, 
     toggleAuthModal, 
     user,
+    setUser,
     searchQuery,
     setSearchQuery
   } = useStore();
@@ -105,17 +106,28 @@ const Navbar = () => {
 
             {/* User Account */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleAuthModal}
-                className="relative"
-              >
-                <User className="h-5 w-5" />
-                {user && (
+              {user ? (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setUser(null)}
+                  className="relative"
+                  title="Sign Out"
+                >
+                  <User className="h-5 w-5" />
                   <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full" />
-                )}
-              </Button>
+                </Button>
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={toggleAuthModal}
+                  className="relative"
+                  title="Sign In"
+                >
+                  <User className="h-5 w-5" />
+                </Button>
+              )}
             </motion.div>
 
             {/* Shopping Cart */}

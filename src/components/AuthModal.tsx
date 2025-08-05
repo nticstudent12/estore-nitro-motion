@@ -6,9 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useStore } from '@/stores/useStore';
+import { useToast } from '@/hooks/use-toast';
 
 const AuthModal = () => {
   const { authModalOpen, isSignUp, setAuthModalOpen, setIsSignUp, setUser } = useStore();
+  const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -27,6 +29,12 @@ const AuthModal = () => {
     
     setUser(user);
     setAuthModalOpen(false);
+    
+    // Show success toast
+    toast({
+      title: isSignUp ? "Account created!" : "Welcome back!",
+      description: isSignUp ? "Your account has been created successfully." : "You have been signed in successfully.",
+    });
     
     // Reset form
     setEmail('');

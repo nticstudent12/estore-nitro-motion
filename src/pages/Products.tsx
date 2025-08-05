@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Filter, ChevronDown, SlidersHorizontal } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import CartDrawer from '@/components/CartDrawer';
 import AuthModal from '@/components/AuthModal';
@@ -224,7 +225,8 @@ const Products = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300">
+                  <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300 cursor-pointer">
+                    <Link to={`/product/${product.slug}`} className="block">
                     <div className="aspect-square bg-muted overflow-hidden">
                       <img
                         src={`https://images.unsplash.com/${product.image}?w=400&h=400&fit=crop&auto=format`}
@@ -262,6 +264,7 @@ const Products = () => {
                         </Button>
                       </div>
                     </div>
+                    </Link>
                   </Card>
                 </motion.div>
               ))}
