@@ -3,8 +3,10 @@ import { X, Plus, Minus, ShoppingBag, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useStore } from '@/stores/useStore';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
 
 const CartDrawer = () => {
+  const navigate = useNavigate();
   const { 
     cartOpen, 
     cart, 
@@ -15,6 +17,11 @@ const CartDrawer = () => {
     removeFromCart,
     clearCart 
   } = useStore();
+
+  const handleCheckout = () => {
+    setCartOpen(false);
+    navigate('/checkout');
+  };
 
   const drawerVariants = {
     hidden: { x: '100%' },
@@ -181,7 +188,12 @@ const CartDrawer = () => {
                 </div>
                 
                 <div className="space-y-3">
-                  <Button variant="hero" size="lg" className="w-full">
+                  <Button 
+                    variant="hero" 
+                    size="lg" 
+                    className="w-full"
+                    onClick={handleCheckout}
+                  >
                     Checkout
                   </Button>
                   <Button 
