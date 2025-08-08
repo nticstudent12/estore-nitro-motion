@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useStore } from '@/stores/useStore';
 import { Product } from '@/stores/useStore';
-
+import { Link } from 'react-router-dom';
 interface ProductCarouselProps {
   title: string;
   products: Product[];
@@ -48,9 +48,10 @@ const ProductCarousel = ({ title, products, showShopButton = true }: ProductCaro
               className="flex-shrink-0 w-80"
             >
               <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300">
+                 <Link to={`/product/${product.slug}`} className="block">
                 <div className="aspect-square bg-muted overflow-hidden">
                   <img
-                    src={`https://images.unsplash.com/${product.image}?w=400&h=400&fit=crop&auto=format`}
+                    src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -78,6 +79,7 @@ const ProductCarousel = ({ title, products, showShopButton = true }: ProductCaro
                     Add to Cart
                   </Button>
                 </div>
+                </Link>
               </Card>
             </motion.div>
           ))}

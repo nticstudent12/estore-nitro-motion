@@ -7,9 +7,13 @@ export const sampleProducts: Product[] = [
     price: 89,
     originalPrice: 119,
     image: '/images/products/coderunner-pro-hoodie.jpg',
-    images: ['/images/products/coderunner-pro-hoodie.jpg', '/images/products/coderunner-pro-hoodie.jpg'],
+    images: [
+      '/images/products/coderunner-pro-hoodie.jpg',
+      '/images/products/test1.png'
+    ],
     category: 'Hoodies',
-    description: 'Premium cotton hoodie designed for developers who value comfort and style. Features soft fleece lining and spacious front pocket.',
+    description:
+      'Premium cotton hoodie designed for developers who value comfort and style. Features soft fleece lining and spacious front pocket.',
     rating: 4.9,
     reviews: 234,
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -24,9 +28,13 @@ export const sampleProducts: Product[] = [
     price: 39,
     originalPrice: 49,
     image: '/images/products/devflow-elite-tshirt.jpg',
-    images: ['/images/products/devflow-elite-tshirt.jpg', '/images/products/devflow-elite-tshirt.jpg'],
+    images: [
+      '/images/products/devflow-elite-tshirt.jpg',
+      '/images/products/test1.png'
+    ],
     category: 'T-Shirts',
-    description: 'Sleek t-shirt perfect for the modern developer. Combines style with ultra-soft fabric for all-day comfort.',
+    description:
+      'Sleek t-shirt perfect for the modern developer. Combines style with ultra-soft fabric for all-day comfort.',
     rating: 4.7,
     reviews: 156,
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -41,9 +49,13 @@ export const sampleProducts: Product[] = [
     price: 69,
     originalPrice: 89,
     image: '/images/products/terminal-walker-sweatshirt.jpg',
-    images: ['/images/products/terminal-walker-sweatshirt.jpg', '/images/products/terminal-walker-sweatshirt.jpg'],
+    images: [
+      '/images/products/terminal-walker-sweatshirt.jpg',
+      '/images/products/test1.png'
+    ],
     category: 'Sweatshirts',
-    description: 'Casual everyday sweatshirt for developers. Minimalist design with maximum comfort for daily wear.',
+    description:
+      'Casual everyday sweatshirt for developers. Minimalist design with maximum comfort for daily wear.',
     rating: 4.6,
     reviews: 89,
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -58,9 +70,13 @@ export const sampleProducts: Product[] = [
     price: 129,
     originalPrice: 159,
     image: '/images/products/stack-overflow-jacket.jpg',
-    images: ['/images/products/stack-overflow-jacket.jpg', '/images/products/stack-overflow-jacket.jpg'],
+    images: [
+      '/images/products/stack-overflow-jacket.jpg',
+      '/images/products/test1.png'
+    ],
     category: 'Jackets',
-    description: 'Premium jacket for the elite developer. Advanced materials meet exceptional style and comfort.',
+    description:
+      'Premium jacket for the elite developer. Advanced materials meet exceptional style and comfort.',
     rating: 4.8,
     reviews: 167,
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -75,9 +91,13 @@ export const sampleProducts: Product[] = [
     price: 49,
     originalPrice: 59,
     image: '/images/products/git-push-force-shirt.jpg',
-    images: ['/images/products/git-push-force-shirt.jpg', '/images/products/git-push-force-shirt.jpg'],
+    images: [
+      '/images/products/git-push-force-shirt.jpg',
+      '/images/products/test1.png'
+    ],
     category: 'Athletic',
-    description: 'Athletic shirt for active developers. Perfect for workouts, runs, and active lifestyle with moisture-wicking fabric.',
+    description:
+      'Athletic shirt for active developers. Perfect for workouts, runs, and active lifestyle with moisture-wicking fabric.',
     rating: 4.5,
     reviews: 92,
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -92,9 +112,13 @@ export const sampleProducts: Product[] = [
     price: 55,
     originalPrice: 69,
     image: '/images/products/async-runner-shirt.jpg',
-    images: ['/images/products/async-runner-shirt.jpg', '/images/products/async-runner-shirt.jpg'],
+    images: [
+      '/images/products/async-runner-shirt.jpg',
+      '/images/products/test1.png'
+    ],
     category: 'Performance',
-    description: 'High-performance shirt optimized for developers who code and run. Lightweight, breathable, and ultra-comfortable.',
+    description:
+      'High-performance shirt optimized for developers who code and run. Lightweight, breathable, and ultra-comfortable.',
     rating: 4.7,
     reviews: 134,
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -107,4 +131,6 @@ export const sampleProducts: Product[] = [
 
 export const featuredProducts = sampleProducts.filter(product => product.featured);
 export const newProducts = sampleProducts.slice(0, 3);
-export const saleProducts = sampleProducts.filter(product => product.originalPrice && product.originalPrice > product.price);
+export const saleProducts = sampleProducts.filter(
+  product => product.originalPrice && product.originalPrice > product.price
+);

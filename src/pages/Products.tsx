@@ -226,10 +226,10 @@ const Products = () => {
                   transition={{ delay: index * 0.05 }}
                 >
                   <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300 cursor-pointer">
-                    <Link to={`/product/${product.slug}`} className="block">
+                {/* herer we git problem */}    <Link to={`/product/${product.slug}`} className="block">
                     <div className="aspect-square bg-muted overflow-hidden">
                       <img
-                        src={`https://images.unsplash.com/${product.image}?w=400&h=400&fit=crop&auto=format`}
+                        src={product.image}
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

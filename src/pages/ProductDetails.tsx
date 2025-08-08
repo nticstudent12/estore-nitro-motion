@@ -83,7 +83,7 @@ const ProductDetails = () => {
               layoutId={`product-image-${product.id}`}
             >
               <img
-                src={`https://images.unsplash.com/${images[selectedImage]}?w=600&h=600&fit=crop&auto=format`}
+                src={`${images[selectedImage]}`}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -100,7 +100,7 @@ const ProductDetails = () => {
                     }`}
                   >
                     <img
-                      src={`https://images.unsplash.com/${image}?w=150&h=150&fit=crop&auto=format`}
+                      src={image}
                       alt={`${product.name} view ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
