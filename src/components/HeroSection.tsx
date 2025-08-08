@@ -177,7 +177,7 @@ const HeroSection = () => {
                     CodeRunner Pro
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    Ultimate performance sneaker for developers
+                    Premium clothing designed for developers
                   </p>
                   <div className="flex items-center justify-center space-x-2">
                     <span className="text-2xl font-black text-foreground">$299</span>

@@ -13,20 +13,19 @@ const Index = () => {
   const products = useStore((state) => state.products);
 
   // Filter products for different sections
-  const shoesProducts = products.filter(p => p.category.toLowerCase().includes('shoes'));
-  const clothingProducts = products.filter(p => p.category.toLowerCase().includes('clothing') || p.category.toLowerCase().includes('apparel'));
+  const clothingProducts = products.filter(p => ['hoodies', 't-shirts', 'sweatshirts', 'jackets', 'athletic', 'performance'].includes(p.category.toLowerCase()));
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <ProductCarousel 
-        title="Best of Air Max" 
-        products={shoesProducts}
+        title="Featured Collection" 
+        products={clothingProducts}
         showShopButton={true}
       />
       <ProductCarousel 
-        title="Gear Up" 
+        title="New Arrivals" 
         products={clothingProducts}
         showShopButton={true}
       />

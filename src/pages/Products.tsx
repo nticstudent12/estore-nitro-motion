@@ -26,7 +26,7 @@ const Products = () => {
   const [sortBy, setSortBy] = useState<string>('featured');
   const [showFilters, setShowFilters] = useState(false);
 
-  const categories = ['Shoes', 'Clothing', 'Accessories'];
+  const categories = ['T-Shirts', 'Hoodies', 'Sweatshirts', 'Jackets', 'Athletic', 'Performance'];
   const genders = ['Men', 'Women', 'Unisex'];
   const priceRanges = [
     { label: 'Under ₹ 2,500', value: '0-2500' },

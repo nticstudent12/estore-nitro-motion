@@ -5,20 +5,20 @@ import { Twitter, Facebook, Youtube, Instagram } from 'lucide-react';
 const Footer = () => {
   const footerSections = [
     {
-      title: 'Icons',
-      links: ['Air Force 1', 'Huarache', 'Air Max 90', 'Air Max 95']
-    },
-    {
-      title: 'Shoes',
-      links: ['All Shoes', 'Custom Shoes', 'Jordan Shoes', 'Running Shoes']
+      title: 'Featured',
+      links: ['New Arrivals', 'Best Sellers', 'Sale Items', 'Premium Collection']
     },
     {
       title: 'Clothing',
-      links: ['All Clothing', 'Modest Wear', 'Hoodies & Pullovers', 'Shirts & Tops']
+      links: ['T-Shirts', 'Hoodies', 'Sweatshirts', 'Jackets']
+    },
+    {
+      title: 'Categories',
+      links: ['Athletic', 'Performance', 'Casual', 'Premium']
     },
     {
       title: "Kids'",
-      links: ['Infant & Toddler Shoes', "Kids' Shoes", "Kids' Jordan Shoes", "Kids' Basketball Shoes"]
+      links: ['Kids T-Shirts', "Kids' Hoodies", "Kids' Sweatshirts", "Kids' Jackets"]
     }
   ];
 
