@@ -28,12 +28,6 @@ const ProductCarousel = ({ title, products, showShopButton = true }: ProductCaro
               <Button variant="outline" size="sm">
                 Shop
               </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <ChevronRight className="h-4 w-4" />
-              </Button>
             </div>
           )}
         </div>
