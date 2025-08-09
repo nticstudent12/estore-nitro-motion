@@ -32,7 +32,7 @@ const ProductCarousel = ({ title, products, showShopButton = true }: ProductCaro
           )}
         </div>
 
-        <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4">
+        <div className="flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide pb-4">
           {products.slice(0, 4).map((product, index) => (
             <motion.div
               key={product.id}
