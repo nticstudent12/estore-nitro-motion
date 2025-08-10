@@ -253,21 +253,7 @@ const ProductDetails = () => {
                 {product.inStock ? 'Add to Cart' : 'Out of Stock'}
               </Button>
               
-              <div className="flex space-x-4">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="flex-1"
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                >
-                  <Heart className={`h-5 w-5 mr-2 ${isWishlisted ? 'fill-current' : ''}`} />
-                  Wishlist
-                </Button>
-                <Button variant="outline" size="lg">
-                  <Share2 className="h-5 w-5 mr-2" />
-                  Share
-                </Button>
-              </div>
+              
             </div>
 
             {/* Stock Status */}
