@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useStore } from '@/stores/useStore';
 import { Product } from '@/stores/useStore';
 import { Link } from 'react-router-dom';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 interface ProductCarouselProps {
   title: string;
   products: Product[];
@@ -33,55 +32,59 @@ const ProductCarousel = ({ title, products, showShopButton = true }: ProductCaro
           )}
         </div>
 
-        <Carousel className="w-full">
-          <CarouselContent className="gap-4">
-            {products.slice(0, 4).map((product, index) => (
-              <CarouselItem key={product.id} className="basis-80">
+        <Carousel className="w-full" opts={{ align: "start", loop: true }}>
+          <CarouselContent className="-ml-4">
+            {products.slice(0, 6).map((product, index) => (
+              <CarouselItem key={product.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
+                  className="h-full"
                 >
-                  <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300">
-                     <Link to={`/product/${product.slug}`} className="block">
-                    <div className="aspect-square bg-muted overflow-hidden">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-foreground line-clamp-2">{product.name}</h3>
-                          <p className="text-sm text-muted-foreground">{product.category}</p>
-                        </div>
-                        <span className="text-lg font-bold text-foreground">₹ {product.price.toLocaleString()}</span>
+                  <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300 h-full">
+                    <Link to={`/product/${product.slug}`} className="block h-full">
+                      <div className="aspect-square bg-muted overflow-hidden">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
                       </div>
-                      
-                      {product.colors && product.colors.length > 0 && (
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {product.colors.length} Colour{product.colors.length > 1 ? 's' : ''}
-                        </p>
-                      )}
+                      <div className="p-4">
+                        <div className="flex justify-between items-start mb-2">
+                          <div>
+                            <h3 className="font-semibold text-foreground line-clamp-2">{product.name}</h3>
+                            <p className="text-sm text-muted-foreground">{product.category}</p>
+                          </div>
+                          <span className="text-lg font-bold text-foreground">₹ {product.price.toLocaleString()}</span>
+                        </div>
+                        
+                        {product.colors && product.colors.length > 0 && (
+                          <p className="text-sm text-muted-foreground mb-3">
+                            {product.colors.length} Colour{product.colors.length > 1 ? 's' : ''}
+                          </p>
+                        )}
 
-                      <Button 
-                        onClick={() => handleAddToCart(product)}
-                        className="w-full"
-                        variant="secondary"
-                      >
-                        Add to Cart
-                      </Button>
-                    </div>
+                        <Button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleAddToCart(product);
+                          }}
+                          className="w-full"
+                          variant="secondary"
+                        >
+                          Add to Cart
+                        </Button>
+                      </div>
                     </Link>
                   </Card>
                 </motion.div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="left-2" />
+          <CarouselNext className="right-2" />
         </Carousel>
       </div>
     </section>
