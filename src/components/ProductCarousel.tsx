@@ -35,7 +35,7 @@ const ProductCarousel = ({ title, products, showShopButton = true }: ProductCaro
         <Carousel className="w-full" opts={{ align: "start", loop: true }}>
           <CarouselContent className="-ml-4">
             {products.slice(0, 6).map((product, index) => (
-              <CarouselItem key={product.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+              <CarouselItem key={product.id} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
