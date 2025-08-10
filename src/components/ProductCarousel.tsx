@@ -5,7 +5,6 @@ import { Card } from '@/components/ui/card';
 import { useStore } from '@/stores/useStore';
 import { Product } from '@/stores/useStore';
 import { Link } from 'react-router-dom';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 interface ProductCarouselProps {
   title: string;
   products: Product[];
@@ -33,56 +32,52 @@ const ProductCarousel = ({ title, products, showShopButton = true }: ProductCaro
           )}
         </div>
 
-        <Carousel className="w-full">
-          <CarouselContent className="gap-4">
-            {products.slice(0, 4).map((product, index) => (
-              <CarouselItem key={product.id} className="basis-80">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300">
-                     <Link to={`/product/${product.slug}`} className="block">
-                    <div className="aspect-square bg-muted overflow-hidden">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+        <div className="flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide pb-4">
+          {products.slice(0, 4).map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="flex-shrink-0 w-80"
+            >
+              <Card className="group overflow-hidden border-0 bg-card hover:shadow-elegant transition-all duration-300">
+                 <Link to={`/product/${product.slug}`} className="block">
+                <div className="aspect-square bg-muted overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="font-semibold text-foreground line-clamp-2">{product.name}</h3>
+                      <p className="text-sm text-muted-foreground">{product.category}</p>
                     </div>
-                    <div className="p-4">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-foreground line-clamp-2">{product.name}</h3>
-                          <p className="text-sm text-muted-foreground">{product.category}</p>
-                        </div>
-                        <span className="text-lg font-bold text-foreground">₹ {product.price.toLocaleString()}</span>
-                      </div>
-                      
-                      {product.colors && product.colors.length > 0 && (
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {product.colors.length} Colour{product.colors.length > 1 ? 's' : ''}
-                        </p>
-                      )}
+                    <span className="text-lg font-bold text-foreground">₹ {product.price.toLocaleString()}</span>
+                  </div>
+                  
+                  {product.colors && product.colors.length > 0 && (
+                    <p className="text-sm text-muted-foreground mb-3">
+                      {product.colors.length} Colour{product.colors.length > 1 ? 's' : ''}
+                    </p>
+                  )}
 
-                      <Button 
-                        onClick={() => handleAddToCart(product)}
-                        className="w-full"
-                        variant="secondary"
-                      >
-                        Add to Cart
-                      </Button>
-                    </div>
-                    </Link>
-                  </Card>
-                </motion.div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+                  <Button 
+                    onClick={() => handleAddToCart(product)}
+                    className="w-full"
+                    variant="secondary"
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+                </Link>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
