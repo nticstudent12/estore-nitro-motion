@@ -182,18 +182,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Logo - Centered */}
-          <motion.div 
-            className="absolute left-1/2 transform -translate-x-1/2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link to="/" className="flex items-center">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-black text-xl">ba</span>
-              </div>
-            </Link>
-          </motion.div>
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-2">
