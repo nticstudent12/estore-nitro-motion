@@ -1,15 +1,23 @@
 import { motion } from 'framer-motion';
-import { Search, ShoppingBag, User, Menu, X } from 'lucide-react';
+import { Search, ShoppingBag, User, Menu, X, ChevronDown, Heart } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useStore } from '@/stores/useStore';
 import { cn } from '@/lib/utils';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const navigate = useNavigate();
   
   const { 
     cartItemsCount, 
@@ -21,116 +29,178 @@ const Navbar = () => {
     setSearchQuery
   } = useStore();
 
-  const navLinks = [
-    { name: 'New & Featured', href: '/products' },
-    { name: 'Men', href: '/products' },
-    { name: 'Women', href: '/products' },
-    { name: 'Kids', href: '/products' },
-    { name: 'Sale', href: '/products' },
-  ];
+  const handleCategoryFilter = (category: string) => {
+    const params = new URLSearchParams();
+    params.set('category', category);
+    navigate(`/products?${params.toString()}`);
+  };
+
+  const handleSpecialFilter = (filter: string) => {
+    const params = new URLSearchParams();
+    params.set('filter', filter);
+    navigate(`/products?${params.toString()}`);
+  };
 
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50"
+      className="sticky top-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border/50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div 
-            className="flex-shrink-0"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          {/* Mobile Menu Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-black text-lg">e</span>
-              </div>
-              <span className="text-xl font-black tracking-tight text-gradient">
-                .eStore
-              </span>
-            </Link>
-          </motion.div>
+            <Menu className="h-5 w-5" />
+          </Button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link, index) => (
-                <motion.div key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-foreground hover:text-accent transition-colors duration-200 font-medium tracking-tight"
-                  >
-                    <motion.span
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      whileHover={{ y: -2 }}
-                      className="inline-block"
-                    >
-                      {link.name}
-                    </motion.span>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+          <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-foreground hover:text-accent transition-colors font-medium">
+              Main
+            </Link>
+            
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-foreground hover:text-accent">
+                    Shop
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid w-[600px] gap-6 p-6 md:w-[500px] lg:w-[600px]">
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <h3 className="mb-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                            By Category
+                          </h3>
+                          <div className="space-y-3">
+                            <div>
+                              <h4 className="font-medium text-foreground mb-2">Tops</h4>
+                              <div className="space-y-1">
+                                <button
+                                  onClick={() => handleCategoryFilter('T-Shirts')}
+                                  className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  T-Shirts
+                                </button>
+                                <button
+                                  onClick={() => handleCategoryFilter('Jackets')}
+                                  className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  Jackets & Coats
+                                </button>
+                                <button
+                                  onClick={() => handleCategoryFilter('Hoodies')}
+                                  className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  Hoodies & Sweatshirts
+                                </button>
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h4 className="font-medium text-foreground mb-2">Bottoms</h4>
+                              <div className="space-y-1">
+                                <button
+                                  onClick={() => handleCategoryFilter('Cargo Pants')}
+                                  className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  Cargo Pants
+                                </button>
+                                <button
+                                  onClick={() => handleCategoryFilter('Joggers')}
+                                  className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  Joggers & Sweatpants
+                                </button>
+                                <button
+                                  onClick={() => handleCategoryFilter('Jeans')}
+                                  className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  Jeans
+                                </button>
+                                <button
+                                  onClick={() => handleCategoryFilter('Track Pants')}
+                                  className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                  Track Pants
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <h3 className="mb-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider flex items-center">
+                              <span className="mr-2">🔥</span> Featured
+                            </h3>
+                            <button
+                              onClick={() => handleSpecialFilter('latest')}
+                              className="block w-full text-left text-sm text-muted-foreground hover:text-foreground transition-colors"
+                            >
+                              Last Drop
+                            </button>
+                          </div>
+                          
+                          <div>
+                            <h3 className="mb-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                              Shop
+                            </h3>
+                            <button
+                              onClick={() => navigate('/products')}
+                              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-md transition-colors"
+                            >
+                              All Products
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
+            <Link to="/gallery" className="text-foreground hover:text-accent transition-colors font-medium">
+              Gallery
+            </Link>
+            <Link to="/about" className="text-foreground hover:text-accent transition-colors font-medium">
+              About
+            </Link>
+            <Link to="/support" className="text-foreground hover:text-accent transition-colors font-medium">
+              Support
+            </Link>
+            <Link to="/community" className="text-foreground hover:text-accent transition-colors font-medium">
+              Community
+            </Link>
           </div>
 
-          {/* Search Bar (Desktop) */}
-          <div className="hidden md:flex flex-1 max-w-md mx-8">
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search products..."
-                className="pl-10 bg-muted/50 border-border/50 focus:border-accent transition-colors"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-          </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Mobile Search Toggle */}
+          <div className="flex items-center space-x-2">
             <Button
               variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setSearchOpen(!searchOpen)}
+              onClick={toggleAuthModal}
+              className="hidden md:flex items-center text-sm font-medium"
             >
+              Login
+            </Button>
+
+            <Button variant="ghost" size="icon">
               <Search className="h-5 w-5" />
             </Button>
 
-            {/* User Account */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              {user ? (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setUser(null)}
-                  className="relative"
-                  title="Sign Out"
-                >
-                  <User className="h-5 w-5" />
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full" />
-                </Button>
-              ) : (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={toggleAuthModal}
-                  className="relative"
-                  title="Sign In"
-                >
-                  <User className="h-5 w-5" />
-                </Button>
-              )}
-            </motion.div>
+            <Button variant="ghost" size="icon">
+              <Heart className="h-5 w-5" />
+            </Button>
 
-            {/* Shopping Cart */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 variant="ghost"
@@ -150,43 +220,8 @@ const Navbar = () => {
                 )}
               </Button>
             </motion.div>
-
-            {/* Mobile Menu Toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
           </div>
         </div>
-
-        {/* Mobile Search Bar */}
-        {searchOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden py-4 border-t border-border/50"
-          >
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search products..."
-                className="pl-10 bg-muted/50 border-border/50 focus:border-accent transition-colors"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-          </motion.div>
-        )}
 
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
@@ -197,24 +232,24 @@ const Navbar = () => {
             className="md:hidden py-4 border-t border-border/50"
           >
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link, index) => (
-                <motion.div key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-foreground hover:text-accent transition-colors duration-200 font-medium tracking-tight px-2 py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <motion.span
-                      initial={{ x: -20, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className="inline-block"
-                    >
-                      {link.name}
-                    </motion.span>
-                  </Link>
-                </motion.div>
-              ))}
+              <Link to="/" className="text-foreground font-medium px-2 py-1" onClick={() => setMobileMenuOpen(false)}>
+                Main
+              </Link>
+              <Link to="/products" className="text-foreground font-medium px-2 py-1" onClick={() => setMobileMenuOpen(false)}>
+                Shop
+              </Link>
+              <Link to="/gallery" className="text-foreground font-medium px-2 py-1" onClick={() => setMobileMenuOpen(false)}>
+                Gallery
+              </Link>
+              <Link to="/about" className="text-foreground font-medium px-2 py-1" onClick={() => setMobileMenuOpen(false)}>
+                About
+              </Link>
+              <Link to="/support" className="text-foreground font-medium px-2 py-1" onClick={() => setMobileMenuOpen(false)}>
+                Support
+              </Link>
+              <Link to="/community" className="text-foreground font-medium px-2 py-1" onClick={() => setMobileMenuOpen(false)}>
+                Community
+              </Link>
             </div>
           </motion.div>
         )}
