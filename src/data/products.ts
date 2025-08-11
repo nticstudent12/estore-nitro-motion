@@ -13,10 +13,10 @@ export const sampleProducts: Product[] = [
     ],
     category: 'Hoodies',
     description:
-      'Premium cotton hoodie designed for developers who value comfort and style. Features soft fleece lining and spacious front pocket.',
+      'Premium cotton hoodie designed for men who value comfort and style. Features soft fleece lining and spacious front pocket.',
     rating: 4.9,
     reviews: 234,
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Black', 'White', 'Gray', 'Navy'],
     inStock: true,
     featured: true,
@@ -34,10 +34,10 @@ export const sampleProducts: Product[] = [
     ],
     category: 'T-Shirts',
     description:
-      'Sleek t-shirt perfect for the modern developer. Combines style with ultra-soft fabric for all-day comfort.',
+      'Sleek t-shirt perfect for the modern man. Combines style with ultra-soft fabric for all-day comfort.',
     rating: 4.7,
     reviews: 156,
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Black', 'White', 'Red', 'Blue'],
     inStock: true,
     featured: true,
@@ -53,12 +53,12 @@ export const sampleProducts: Product[] = [
       '/images/products/terminal-walker-sweatshirt.jpg',
       '/images/products/test1.png'
     ],
-    category: 'Sweatshirts',
+    category: 'Hoodies',
     description:
-      'Casual everyday sweatshirt for developers. Minimalist design with maximum comfort for daily wear.',
+      'Casual everyday sweatshirt for men. Minimalist design with maximum comfort for daily wear.',
     rating: 4.6,
     reviews: 89,
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Black', 'White', 'Gray'],
     inStock: true,
     featured: false,
@@ -76,10 +76,10 @@ export const sampleProducts: Product[] = [
     ],
     category: 'Jackets',
     description:
-      'Premium jacket for the elite developer. Advanced materials meet exceptional style and comfort.',
+      'Premium jacket for the modern man. Advanced materials meet exceptional style and comfort.',
     rating: 4.8,
     reviews: 167,
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Black', 'White', 'Navy', 'Charcoal'],
     inStock: true,
     featured: true,
@@ -87,28 +87,28 @@ export const sampleProducts: Product[] = [
   },
   {
     id: '5',
-    name: 'Git Push Force Athletic Shirt',
-    price: 49,
-    originalPrice: 59,
+    name: 'Urban Cargo Pants',
+    price: 79,
+    originalPrice: 99,
     image: '/images/products/git-push-force-shirt.jpg',
     images: [
       '/images/products/git-push-force-shirt.jpg',
       '/images/products/test1.png'
     ],
-    category: 'Athletic',
+    category: 'Cargo Pants',
     description:
-      'Athletic shirt for active developers. Perfect for workouts, runs, and active lifestyle with moisture-wicking fabric.',
+      'Tactical cargo pants perfect for urban exploration. Multiple pockets and durable fabric construction.',
     rating: 4.5,
     reviews: 92,
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Black', 'White', 'Red', 'Green'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Black', 'Khaki', 'Olive', 'Gray'],
     inStock: true,
     featured: false,
-    slug: 'git-push-force-athletic-shirt'
+    slug: 'urban-cargo-pants'
   },
   {
     id: '6',
-    name: 'Async Runner Performance Tee',
+    name: 'Athletic Performance Tee',
     price: 55,
     originalPrice: 69,
     image: '/images/products/async-runner-shirt.jpg',
@@ -116,16 +116,79 @@ export const sampleProducts: Product[] = [
       '/images/products/async-runner-shirt.jpg',
       '/images/products/test1.png'
     ],
-    category: 'Performance',
+    category: 'T-Shirts',
     description:
-      'High-performance shirt optimized for developers who code and run. Lightweight, breathable, and ultra-comfortable.',
+      'High-performance athletic shirt for active men. Lightweight, breathable, and moisture-wicking fabric.',
     rating: 4.7,
     reviews: 134,
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    colors: ['Black', 'White', 'Blue', 'Orange'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Black', 'White', 'Blue', 'Red'],
     inStock: true,
     featured: true,
-    slug: 'async-runner-performance-tee'
+    slug: 'athletic-performance-tee'
+  },
+  {
+    id: '7',
+    name: 'Classic Jogger Sweatpants',
+    price: 65,
+    originalPrice: 85,
+    image: '/images/products/coderunner-pro-hoodie.jpg',
+    images: [
+      '/images/products/coderunner-pro-hoodie.jpg',
+      '/images/products/test1.png'
+    ],
+    category: 'Joggers',
+    description:
+      'Comfortable jogger sweatpants for men. Perfect for lounging, workouts, and casual wear.',
+    rating: 4.6,
+    reviews: 201,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Black', 'Gray', 'Navy', 'Charcoal'],
+    inStock: true,
+    featured: false,
+    slug: 'classic-jogger-sweatpants'
+  },
+  {
+    id: '8',
+    name: 'Slim Fit Denim Jeans',
+    price: 95,
+    originalPrice: 125,
+    image: '/images/products/devflow-elite-tshirt.jpg',
+    images: [
+      '/images/products/devflow-elite-tshirt.jpg',
+      '/images/products/test1.png'
+    ],
+    category: 'Jeans',
+    description:
+      'Premium slim fit jeans for men. Classic design with modern comfort and durability.',
+    rating: 4.8,
+    reviews: 312,
+    sizes: ['30', '32', '34', '36', '38'],
+    colors: ['Dark Blue', 'Light Blue', 'Black', 'Gray'],
+    inStock: true,
+    featured: true,
+    slug: 'slim-fit-denim-jeans'
+  },
+  {
+    id: '9',
+    name: 'Athletic Track Pants',
+    price: 72,
+    originalPrice: 92,
+    image: '/images/products/terminal-walker-sweatshirt.jpg',
+    images: [
+      '/images/products/terminal-walker-sweatshirt.jpg',
+      '/images/products/test1.png'
+    ],
+    category: 'Track Pants',
+    description:
+      'Professional track pants for men. Ideal for sports, training, and active lifestyle.',
+    rating: 4.4,
+    reviews: 156,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Black', 'Navy', 'Red', 'White'],
+    inStock: true,
+    featured: false,
+    slug: 'athletic-track-pants'
   }
 ];
 

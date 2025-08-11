@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Filter, ChevronDown, SlidersHorizontal } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import CartDrawer from '@/components/CartDrawer';
 import AuthModal from '@/components/AuthModal';
@@ -20,20 +20,36 @@ const Products = () => {
   useInitializeStore();
   
   const { products, addToCart } = useStore();
+  const [searchParams] = useSearchParams();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<string>('');
   const [sortBy, setSortBy] = useState<string>('featured');
   const [showFilters, setShowFilters] = useState(false);
+  const [pageTitle, setPageTitle] = useState('Men\'s Clothing');
 
-  const categories = ['T-Shirts', 'Hoodies', 'Sweatshirts', 'Jackets', 'Athletic', 'Performance'];
-  const genders = ['Men', 'Women', 'Unisex'];
+  const categories = ['T-Shirts', 'Hoodies', 'Jackets', 'Cargo Pants', 'Joggers', 'Jeans', 'Track Pants'];
   const priceRanges = [
-    { label: 'Under ₹ 2,500', value: '0-2500' },
-    { label: '₹ 2,501 - ₹ 7,500', value: '2501-7500' },
-    { label: '₹ 7,501 - ₹ 12,500', value: '7501-12500' },
-    { label: 'Over ₹ 12,500', value: '12500+' }
+    { label: 'Under $50', value: '0-50' },
+    { label: '$50 - $100', value: '50-100' },
+    { label: '$100 - $150', value: '100-150' },
+    { label: 'Over $150', value: '150+' }
   ];
+
+  // Handle URL parameters for filtering
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    const filterParam = searchParams.get('filter');
+    
+    if (categoryParam) {
+      setSelectedCategories([categoryParam]);
+      setPageTitle(`${categoryParam} for Men`);
+    }
+    
+    if (filterParam === 'latest') {
+      setSortBy('newest');
+      setPageTitle('Latest Drops - Men\'s Clothing');
+    }
+  }, [searchParams]);
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
@@ -44,16 +60,10 @@ const Products = () => {
       );
     }
 
-    if (selectedGenders.length > 0) {
-      filtered = filtered.filter(product => 
-        selectedGenders.some(gender => product.category.toLowerCase().includes(gender.toLowerCase()))
-      );
-    }
-
     if (priceRange) {
       const [min, max] = priceRange.split('-').map(Number);
       filtered = filtered.filter(product => {
-        if (priceRange === '12500+') return product.price >= 12500;
+        if (priceRange === '150+') return product.price >= 150;
         return product.price >= min && product.price <= max;
       });
     }
@@ -75,7 +85,7 @@ const Products = () => {
     }
 
     return filtered;
-  }, [products, selectedCategories, selectedGenders, priceRange, sortBy]);
+  }, [products, selectedCategories, priceRange, sortBy]);
 
   const handleCategoryChange = (category: string, checked: boolean) => {
     if (checked) {
@@ -85,13 +95,6 @@ const Products = () => {
     }
   };
 
-  const handleGenderChange = (gender: string, checked: boolean) => {
-    if (checked) {
-      setSelectedGenders([...selectedGenders, gender]);
-    } else {
-      setSelectedGenders(selectedGenders.filter(g => g !== gender));
-    }
-  };
 
   const handleAddToCart = (product: any) => {
     addToCart(product, 1);
@@ -111,25 +114,6 @@ const Products = () => {
                 onCheckedChange={(checked) => handleCategoryChange(category, checked as boolean)}
               />
               <Label htmlFor={category} className="text-sm">{category}</Label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <Separator />
-
-      {/* Gender */}
-      <div>
-        <h3 className="font-semibold text-foreground mb-4">Gender</h3>
-        <div className="space-y-3">
-          {genders.map(gender => (
-            <div key={gender} className="flex items-center space-x-2">
-              <Checkbox
-                id={gender}
-                checked={selectedGenders.includes(gender)}
-                onCheckedChange={(checked) => handleGenderChange(gender, checked as boolean)}
-              />
-              <Label htmlFor={gender} className="text-sm">{gender}</Label>
             </div>
           ))}
         </div>
@@ -166,7 +150,7 @@ const Products = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">
-              New ({filteredProducts.length})
+              {pageTitle} ({filteredProducts.length})
             </h1>
           </div>
           
@@ -278,7 +262,6 @@ const Products = () => {
                   className="mt-4"
                   onClick={() => {
                     setSelectedCategories([]);
-                    setSelectedGenders([]);
                     setPriceRange('');
                   }}
                 >
