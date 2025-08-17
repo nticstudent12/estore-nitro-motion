@@ -65,18 +65,29 @@ const CartDrawer = () => {
         >
           <div className="flex h-full flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-border p-6">
-              <div className="flex items-center space-x-2">
-                <ShoppingBag className="h-6 w-6" />
-                <h2 className="text-xl font-bold">Cart ({cartItemsCount})</h2>
+            <div className="border-b border-border p-6">
+              {/* Brand Logo */}
+              <div className="flex justify-center mb-4">
+                <img 
+                  src="/lovable-uploads/ee58d6dd-244b-4797-babc-4935bb4eb035.png" 
+                  alt="SM Vêtement Gros" 
+                  className="h-8 w-auto opacity-80"
+                />
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setCartOpen(false)}
-              >
-                <X className="h-6 w-6" />
-              </Button>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <ShoppingBag className="h-6 w-6" />
+                  <h2 className="text-xl font-bold">Cart ({cartItemsCount})</h2>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setCartOpen(false)}
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+              </div>
             </div>
 
             {/* Cart Items */}

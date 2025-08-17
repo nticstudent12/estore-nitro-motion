@@ -43,6 +43,15 @@ const Checkout = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
+        {/* Brand Logo */}
+        <div className="flex justify-center mb-8">
+          <img 
+            src="/lovable-uploads/ee58d6dd-244b-4797-babc-4935bb4eb035.png" 
+            alt="SM Vêtement Gros" 
+            className="h-12 w-auto"
+          />
+        </div>
+
         <Link to="/products" className="inline-flex items-center gap-2 text-primary hover:underline mb-6">
           <ArrowLeft className="h-4 w-4" />
           Back to Products
