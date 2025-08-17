@@ -60,6 +60,15 @@ const Navbar = () => {
             <Menu className="h-5 w-5" />
           </Button>
 
+          {/* Logo */}
+          <div className="flex items-center">
+            <img 
+              src="/lovable-uploads/ee58d6dd-244b-4797-babc-4935bb4eb035.png" 
+              alt="SM Vêtement Gros" 
+              className="h-10 w-auto"
+            />
+          </div>
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-foreground hover:text-accent transition-colors font-medium">

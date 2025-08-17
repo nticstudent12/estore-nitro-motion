@@ -146,11 +146,13 @@ const HeroSection = () => {
                 }}
               >
                 <div className="aspect-square bg-gradient-card rounded-2xl flex items-center justify-center relative overflow-hidden">
-                  {/* Placeholder for product image */}
-                  <div className="w-48 h-48 bg-gradient-primary rounded-2xl flex items-center justify-center">
-                    <span className="text-6xl font-black text-primary-foreground opacity-50">
-                      .e
-                    </span>
+                  {/* Brand Logo in Hero */}
+                  <div className="w-48 h-48 bg-gradient-primary rounded-2xl flex items-center justify-center p-8">
+                    <img 
+                      src="/lovable-uploads/ee58d6dd-244b-4797-babc-4935bb4eb035.png" 
+                      alt="SM Vêtement Gros" 
+                      className="w-full h-full object-contain filter brightness-0 invert opacity-80"
+                    />
                   </div>
                   
                   {/* Floating Elements */}

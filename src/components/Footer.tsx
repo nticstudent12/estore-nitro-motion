@@ -55,6 +55,15 @@ const Footer = () => {
   return (
     <footer className="bg-background border-t border-border">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
+        {/* Brand Logo */}
+        <div className="flex justify-center mb-8">
+          <img 
+            src="/lovable-uploads/ee58d6dd-244b-4797-babc-4935bb4eb035.png" 
+            alt="SM Vêtement Gros" 
+            className="h-16 w-auto opacity-80 hover:opacity-100 transition-opacity"
+          />
+        </div>
+
         {/* Main footer content */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {footerSections.map((section) => (
@@ -127,7 +136,7 @@ const Footer = () => {
               </svg>
               <span className="text-sm text-muted-foreground">India</span>
             </div>
-            <span className="text-sm text-muted-foreground">© 2024 .eStore, Inc. All Rights Reserved</span>
+            <span className="text-sm text-muted-foreground">© 2024 SM Vêtement Gros. All Rights Reserved</span>
           </div>
 
           <div className="flex items-center space-x-6">
