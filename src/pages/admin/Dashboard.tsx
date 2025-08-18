@@ -1,4 +1,5 @@
 import { AdminLayout } from "@/components/AdminLayout"
+import { AddProductModal } from "@/components/AddProductModal"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -12,8 +13,11 @@ import {
   ArrowUpRight,
   Activity
 } from "lucide-react"
+import { useState } from "react"
 
 const Dashboard = () => {
+  const [addProductModalOpen, setAddProductModalOpen] = useState(false)
+
   const stats = [
     {
       title: "Total Revenue",
@@ -155,7 +159,11 @@ const Dashboard = () => {
               <CardDescription>Common administrative tasks</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button variant="hero" className="w-full justify-start gap-3 h-12">
+              <Button 
+                variant="hero" 
+                className="w-full justify-start gap-3 h-12"
+                onClick={() => setAddProductModalOpen(true)}
+              >
                 <Package className="h-5 w-5" />
                 Add New Product
               </Button>
@@ -204,6 +212,11 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
+      
+      <AddProductModal 
+        isOpen={addProductModalOpen} 
+        onClose={() => setAddProductModalOpen(false)} 
+      />
     </AdminLayout>
   )
 }
