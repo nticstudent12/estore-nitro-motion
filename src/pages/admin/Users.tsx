@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
+import { AlertTriangle } from "lucide-react"
 import { 
   Table,
   TableBody,
@@ -33,8 +37,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useState } from "react"
+import { useToast } from "@/hooks/use-toast"
 
 const Users = () => {
+  const { toast } = useToast()
+  const [selectedUser, setSelectedUser] = useState<any>(null)
+  const [modalType, setModalType] = useState<'status' | 'role' | 'delete' | null>(null)
+  const [newStatus, setNewStatus] = useState('')
+  const [newRole, setNewRole] = useState('')
+
   const users = [
     {
       id: "1",
@@ -109,6 +121,66 @@ const Users = () => {
   const getInitials = (name: string) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase()
   }
+
+  const handleOpenModal = (user: any, type: 'status' | 'role' | 'delete') => {
+    setSelectedUser(user)
+    setModalType(type)
+    if (type === 'status') {
+      setNewStatus(user.status)
+    } else if (type === 'role') {
+      setNewRole(user.role)
+    }
+  }
+
+  const handleCloseModal = () => {
+    setSelectedUser(null)
+    setModalType(null)
+    setNewStatus('')
+    setNewRole('')
+  }
+
+  const handleStatusChange = () => {
+    if (selectedUser && newStatus) {
+      toast({
+        title: "Status Updated",
+        description: `${selectedUser.name}'s status has been changed to ${newStatus}.`,
+      })
+      handleCloseModal()
+    }
+  }
+
+  const handleRoleChange = () => {
+    if (selectedUser && newRole) {
+      toast({
+        title: "Role Updated", 
+        description: `${selectedUser.name}'s role has been changed to ${newRole}.`,
+      })
+      handleCloseModal()
+    }
+  }
+
+  const handleDeleteUser = () => {
+    if (selectedUser) {
+      toast({
+        title: "User Deleted",
+        description: `${selectedUser.name} has been removed from the system.`,
+        variant: "destructive"
+      })
+      handleCloseModal()
+    }
+  }
+
+  const statusOptions = [
+    { value: 'active', label: 'Active' },
+    { value: 'inactive', label: 'Inactive' },
+    { value: 'suspended', label: 'Suspended' }
+  ]
+
+  const roleOptions = [
+    { value: 'customer', label: 'Customer' },
+    { value: 'moderator', label: 'Moderator' },
+    { value: 'admin', label: 'Admin' }
+  ]
 
   return (
     <AdminLayout 
@@ -258,12 +330,25 @@ const Users = () => {
                             <Mail className="h-4 w-4" />
                             Send Email
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="gap-2">
+                          <DropdownMenuItem 
+                            className="gap-2"
+                            onClick={() => handleOpenModal(user, 'status')}
+                          >
+                            <Shield className="h-4 w-4" />
+                            Change Status
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            className="gap-2"
+                            onClick={() => handleOpenModal(user, 'role')}
+                          >
                             <Shield className="h-4 w-4" />
                             Change Role
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="gap-2 text-red-600">
+                          <DropdownMenuItem 
+                            className="gap-2 text-red-600"
+                            onClick={() => handleOpenModal(user, 'delete')}
+                          >
                             <Trash2 className="h-4 w-4" />
                             Delete User
                           </DropdownMenuItem>
@@ -277,6 +362,139 @@ const Users = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Change Status Modal */}
+      <Dialog open={modalType === 'status'} onOpenChange={handleCloseModal}>
+        <DialogContent className="sm:max-w-md border-0 shadow-card">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
+              Change User Status
+            </DialogTitle>
+            <DialogDescription>
+              Update the status for {selectedUser?.name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="status">Select New Status</Label>
+              <Select value={newStatus} onValueChange={setNewStatus}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose status" />
+                </SelectTrigger>
+                <SelectContent>
+                  {statusOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2 h-2 rounded-full ${
+                          option.value === 'active' ? 'bg-green-500' :
+                          option.value === 'inactive' ? 'bg-gray-500' :
+                          'bg-red-500'
+                        }`} />
+                        {option.label}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={handleCloseModal}>
+              Cancel
+            </Button>
+            <Button variant="hero" onClick={handleStatusChange}>
+              Update Status
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Change Role Modal */}
+      <Dialog open={modalType === 'role'} onOpenChange={handleCloseModal}>
+        <DialogContent className="sm:max-w-md border-0 shadow-card">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
+              Change User Role
+            </DialogTitle>
+            <DialogDescription>
+              Update the role for {selectedUser?.name}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="role">Select New Role</Label>
+              <Select value={newRole} onValueChange={setNewRole}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose role" />
+                </SelectTrigger>
+                <SelectContent>
+                  {roleOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      <div className="flex items-center gap-2">
+                        <Badge variant={getRoleVariant(option.value)} className="text-xs">
+                          {option.label}
+                        </Badge>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {newRole === 'admin' && (
+              <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="flex items-center gap-2 text-yellow-800">
+                  <AlertTriangle className="h-4 w-4" />
+                  <span className="text-sm font-medium">Warning</span>
+                </div>
+                <p className="text-sm text-yellow-700 mt-1">
+                  Admin users have full access to all system features and data.
+                </p>
+              </div>
+            )}
+          </div>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={handleCloseModal}>
+              Cancel
+            </Button>
+            <Button variant="hero" onClick={handleRoleChange}>
+              Update Role
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete User Modal */}
+      <Dialog open={modalType === 'delete'} onOpenChange={handleCloseModal}>
+        <DialogContent className="sm:max-w-md border-0 shadow-card">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-destructive">
+              <AlertTriangle className="h-5 w-5" />
+              Delete User
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete {selectedUser?.name}? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-800">
+                <strong>Warning:</strong> Deleting this user will permanently remove their account, 
+                order history, and all associated data from the system.
+              </p>
+            </div>
+          </div>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={handleCloseModal}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={handleDeleteUser}>
+              Delete User
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </AdminLayout>
   )
 }
